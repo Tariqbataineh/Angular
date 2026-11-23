@@ -1,110 +1,63 @@
-let name = "Electroshop";
-let description = "Electroshop is a leading online retailer of electronics and gadgets, offering a wide range of products from top brands. Our mission is to provide customers with the latest technology at competitive prices, along with exceptional customer service.";
+"use strict";
+// 1. Variables
+let storeName = "Electroshop";
+let description = "Electronics Store";
 const currency = "USD";
-const productNames = [
-    "Smartphone",
-    "Laptop",
-    "Tablet",
-    "Smartwatch",
-    "Wireless Earbuds",
-];
-const productDetails = [
-    ["Smartphone", 699, true, 10],
-    ["Laptop", 1299, true, 5],
-    ["Tablet", 499, false, 0],
-    ["Smartwatch", 199, true, 8],
-    ["Wireless Earbuds", 149, true, 15],
-];
-let status = true;
-if (status) {
-    console.log(`Welcome to ${name}!`);
-    console.log(description);
-    console.log(`All prices are in ${currency}.`);
-    console.log("Available products:");
-    productDetails.forEach((item) => {
-        const price = item[1];
-        if (price > 500) {
-            console.log("Expensive Product");
-        }
-        else if (price >= 100 && price <= 500) {
-            console.log("Moderately Priced Product");
-        }
-        else {
-            console.log("Affordable Product");
-        }
-    });
+// 2. Arrays
+let productNames = ["Phone", "Laptop", "Tablet"];
+// 3. Multi Type Array (Tuple)
+let product = ["Phone", 500, true];
+// 4. If / Else
+let price = 500;
+if (price > 300) {
+    console.log("Expensive");
 }
-let count = 0;
-productDetails.forEach((item) => {
-    const productName = item[0];
-    const price = item[1];
-    if (price > 100) {
-        console.log(`Product: ${productName}, Price: ${price}`);
-        count++;
+else {
+    console.log("Affordable");
+}
+// 5. Loop
+for (let name of productNames) {
+    console.log(name);
+}
+// 6. Function with Return Type
+function calculateDiscount(price) {
+    return price - 50;
+}
+console.log(calculateDiscount(500));
+// 7. Optional Parameter
+function welcome(name) {
+    console.log("Welcome " + (name || "Guest"));
+}
+welcome("Ahmad");
+// 8. Default Parameter
+function showPrice(price, currency = "USD") {
+    console.log(price + " " + currency);
+}
+showPrice(500);
+// 9. Rest Parameter
+function total(...numbers) {
+    let sum = 0;
+    for (let num of numbers) {
+        sum += num;
     }
-});
-console.log(`Total products with price greater than 100: ${count}`);
-function calculateDiscount(price, discountPercentage) {
-    const discountAmount = (price * discountPercentage) / 100;
-    return price - discountAmount;
+    return sum;
 }
-console.log(calculateDiscount(100, 20));
-function checkProductAvailability(productName) {
-    for (const product of productDetails) {
-        if (product[0] === productName) {
-            if (product[2]) {
-                return "In Stock";
-            }
-            return "Out of Stock";
-        }
-    }
-    return "Out of Stock";
-}
-function displayStoreMessage(message) {
-    console.log(message);
-}
-displayStoreMessage("Welcome to the store!");
-function displayProductDetails(productName, price, quantity, description, currency = "USD") {
-    console.log(`Product Name: ${productName}`);
-    console.log(`Price: ${price} ${currency}`);
-    console.log(`Quantity: ${quantity}`);
-    console.log(`Description: ${description || "No description available"}`);
-    console.log(`Currency: ${currency}`);
-}
-function calculateTotalPrice() {
-    let total = 0;
-    productDetails.forEach((product) => {
-        total = total + product[1];
-    });
-    return total;
-}
-console.log(calculateTotalPrice());
-const products = [
-    {
-        name: "Smartphone",
-        description: "A mobile phone with a touchscreen.",
-        price: 699,
-    },
-    {
-        name: "Laptop",
-        description: "A portable computer for work and study.",
-        price: 1299,
-    },
-    {
-        name: "Wireless Earbuds",
-        description: "Wireless headphones for listening to audio.",
-        price: 149,
-    },
+console.log(total(10, 20, 30));
+// 10. Array of Objects
+let products = [
+    { name: "Phone", description: "Smart Phone", price: 500 },
+    { name: "Laptop", description: "Gaming Laptop", price: 1000 },
+    { name: "Tablet", description: "Android Tablet", price: 300 }
 ];
-const button = document.getElementById("load-products");
-const container = document.getElementById("products");
-if (button && container) {
-    button.addEventListener("click", function () {
+// 11. Load Products Button
+function loadProducts() {
+    let container = document.getElementById("products");
+    if (container) {
         container.innerHTML = "";
-        products.forEach(function (product) {
-            container.innerHTML +=
-                `<p>${product.name} - ${product.description} - $${product.price}</p>`;
+        products.forEach((product) => {
+            container.innerHTML += `
+                <p>${product.name} - ${product.description} - $${product.price}</p>
+            `;
         });
-    });
+    }
 }
-export {};
